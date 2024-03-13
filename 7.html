@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="userApp">
+<head>
+<title>To-Do List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body ng-controller="userController">
+<h2>User CRUD</h2>
+<form ng-submit="addUser()">
+<label for="newTask">New User:</label>
+<input type="text" id="uname" ng-model="uname" required><br>
+ Mail:<input type="text" id="umail" ng-model="umail" required><br> 
+ Age: <input type="number" id="age" ng-model="age" required><br> 
+ <button type="submit">Add User</button>
+</form>
+<ul>
+<li ng-repeat="user in users">
+<span>{{ user.uname }}</span>
+<button ng-click="editUser(user)">Edit</button>
+<button ng-click="deleteUser(user)">Delete</button>
+</li>
+</ul>
+<!-- Edit Task Modal -->
+<div ng-show="isEditing">
+<div>
+<label for="edited Task">Edit User:</label>
+<input type="text" id="editedName" ng-model="editedName" required> <input type="text" id="editedMail" ng-model="editedMail" required> <input type="number" id="editedAge" ng-model="editedAge" required> <button ng-click="updateUser()">Update User</button>
+<button ng-click="cancelEdit()">Cancel</button>
+</div>
+</div>
+<script>
+var app = angular.module('userApp', []);
+app.controller('userController', function ($scope) { 
+  $scope.users = [];
+  $scope.addUser = function () {
+    $scope.users.push({
+      uname: $scope.uname,
+      umail:$scope.umail, 
+      age:$scope.age 
+    });
+  };
+  $scope.editUser= function (user) {
+    $scope.isEditing = true;
+    $scope.editedName = user.uname;
+    $scope.editedMail = user.umail;
+    $scope.editedAge = user.age;
+    $scope.editIndex = $scope.users.indexOf(user);
+  };
+  $scope.updateUser = function () {
+    $scope.users[$scope.editIndex].uname = $scope.editedName;
+    $scope.users[$scope.editIndex].umail = $scope.editedMail;
+    $scope.users[$scope.editIndex].age = $scope.editedAge;
+    $scope.cancelEdit();
+  };
+  $scope.deleteUser= function (user) {
+    var index = $scope.users.indexOf(user); 
+    if (index !== -1) {
+      $scope.users.splice(index, 1);
+    }
+  };
+  $scope.cancelEdit = function () {
+    $scope.isEditing = false;
+    $scope.editIndex = -1;
+  };
+});
+</script>
+</body> </html>

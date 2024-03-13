@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app='studentApp'>
+
+<head>
+    <title>Student Details</title>
+    <script src="../angular-1.8.0/angular.min.js"></script>
+</head>
+
+<body ng-controller="StudentController">
+    <h2>Student Details</h2>
+
+    <label>Enter the number of students: </label>
+    <input type="number" ng-model="numberOfStudents">
+
+    <button ng-click="displayStudentCount()">Display Count</button>
+
+    <div ng-show="showCount">
+        <p>Total Number of Students: {{ studentCount }}</p>
+    </div>
+
+    <h3>Student List</h3>
+    <ul>
+        <li ng-repeat="student in nstudents">
+            {{student.name }} - CGPA: {{ student.cgpa }}
+        </li>
+    </ul>
+
+    <script>
+        var app = angular.module('studentApp', []);
+
+        app.controller('StudentController', function ($scope) {
+            $scope.students = [
+                {name: "Amar", cgpa: 7.8},
+                {name: 'Akbar', cgpa: 8.5},
+                {name: "Anamika", cgpa: 9.1},
+                {name: "Arqam", cgpa: 9.4},
+                {name: 'Prabhav', cgpa: 8.5},
+                {name: "Bhat", cgpa: 8.6}
+            ];
+
+            $scope.displayStudentCount = function () {
+                $scope.studentCount = $scope.students.length;
+                $scope.showCount = true;
+            };
+
+            $scope.$watchGroup(['numberOfStudents'], function () {
+            $scope.nstudents = [];
+            for (var i = 0; i < $scope.numberOfStudents && i < $scope.students.length; i++) {
+                $scope.nstudents.push({
+                    name: $scope.students[i].name,
+                    cgpa: $scope.students[i].cgpa
+                });
+            }
+        });
+    });
+    </script>
+</body>
+</html>

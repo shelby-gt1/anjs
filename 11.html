@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+<title>Student Details Converter</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body ng-controller="StudentController">
+<h2>Student Details</h2>
+<ul>
+<li ng-repeat="student in students">
+<strong>Name:</strong> {{ student.name | uppercase }}<br>
+<strong>Usn:</strong> {{ student.usn | uppercase }}<br>
+<strong>CGPA: </strong> {{ student.cgpa | number: 2 }} <!-- Display CGPA with two decimal places -->
+</li>
+</ul>
+<script>
+var app = angular.module('studentApp', []);
+app.controller('StudentController',
+function ($scope) {
+$scope.students = [
+{name: 'Amar', usn: '1234', cgpa: 6.7506 }, {name: 'Akbar', usn: '5678', cgpa: 7.1569 }, {name: 'Amy', usn: 'qwe123', cgpa: 8.2}
+];
+});
+</script>
+</body>
+</html>

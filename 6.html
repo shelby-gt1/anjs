@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+<title>To-Do List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+<body ng-controller="TodoController">
+<h2>To-Do List</h2>
+<form ng-submit="addTask()">
+<label for="newTask">New Task:</label>
+<input type="text" id="newTask" ng-model="newTask" required> <button type="submit">Add Task</button>
+</form>
+<ul>
+<li ng-repeat="task in tasks">
+<span>{{ task.text }}</span>
+<button ng-click="editTask(task)">Edit</button>
+<button ng-click="deleteTask(task)">Delete</button>
+</li>
+</ul>
+<!-- Edit Task Modal -->
+<div ng-show="isEditing">
+<div>
+<label for="editedTask">Edit Task:</label>
+<input type="text" id="editedTask" ng-model="editedTask" required> <button ng-click="updateTask()">Update Task</button>
+<button ng-click="cancelEdit()">Cancel</button>
+</div>
+</div>
+<script>
+var app = angular.module('todoApp', []);
+app.controller('TodoController', function ($scope) {
+$scope.tasks = [
+{ text: 'Task 1' }, { text: 'Task 2' }, { text: 'Task 3' }
+];
+$scope.newTask = '';
+$scope.isEditing = false;
+$scope.editedTask = '';
+$scope.editIndex = -1;
+$scope.addTask = function () {
+if ($scope.newTask.trim() !== '') {
+$scope.tasks.push({ text: $scope.newTask }); $scope.newTask = '';
+}
+};
+$scope.editTask= function (task) {
+$scope.isEditing = true;
+$scope.editedTask = task.text;
+$scope.editIndex = $scope.tasks.indexOf(task);
+};
+$scope.updateTask= function () {
+if ($scope.editedTask.trim() !== '') {
+$scope.tasks[$scope.editIndex].text = $scope.editedTask; $scope.cancelEdit();
+}
+};
+$scope.deleteTask= function (task) {
+var index = $scope.tasks.indexOf(task); if (index !== -1) {
+$scope.tasks.splice(index, 1);
+}
+};
+$scope.cancelEdit = function () {
+$scope.isEditing = false;
+$scope.editedTask = '';
+$scope.editIndex = -1;
+};
+});
+</script>
+</body>
+</html>

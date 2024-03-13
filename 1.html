@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="nameApp">
+    <head>
+        <title>FULL NAME</title>
+        <script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js></script>
+    </head>
+
+    <body ng-controller="NameController">
+        <h1>Name App</h1>
+
+        <div>
+            <label for="firstName">First Nmae:</label>
+            <input type="text" id="firstName" ng-model="firstName">
+        </div>
+
+        <div>
+            <label for="lastName">Last Nmae:</label>
+            <input type="text" id="lastName" ng-model="lastName">
+        </div>
+
+        <p ng-show="fullName">Full Name: {{fullName}}</p>
+
+        <script>
+            var app=angular.module('nameApp',[]);
+
+            app.controller('NameController',function($scope){
+                $scope.firstName='jhon';
+                $scope.lastName='doe';
+
+                $scope.$watchGroup(['firstName','lastName'],function(){
+                    $scope.fullName=$scope.firstName+''+$scope.lastName;
+                });
+            });
+        </script>
+    </body>
+</html>

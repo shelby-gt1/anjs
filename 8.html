@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="loginApp">
+
+<head>
+  <title>Login Form</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+</head>
+
+<body ng-controller="LoginController" >
+  <h2>Login Form</h2>
+
+  <form  ng-submit="submitForm()" novalidate>
+    <label for="username">Username:</label>
+    <input type="text" id="uname" name="uname" ng-model="uname">
+
+    <label for="password">Password:</label>
+    <input type="password" id="pwd" name="pwd" ng-model="pwd">
+
+    <button type="submit">Login</button>
+  </form>
+
+  <script >
+
+var app = angular.module('loginApp', []);
+
+app.controller('LoginController', function ($scope) {
+    
+  $scope.submitForm = function () {
+    var username=$scope.uname.trim();
+    
+    var pwd=$scope.pwd;
+   
+    validateuser(username,pwd);
+  };
+});
+function validateuser(username,pwd)
+{
+    str="";
+   
+    if(username=="undefined" || username=="")
+    {
+        str+="Invalid username\n";
+}
+    if(pwd=="" || pwd.length<=6)
+    {
+        str+="Invalid password\n";
+    }
+    if(str!="")
+    {
+        alert(str);
+        return false;
+    }
+    else 
+       alert('Valid')
+    return true;
+}
+</script>
+</body>
+</html>

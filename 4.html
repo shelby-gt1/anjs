@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="calculatorApp">
+    <head>
+        <title>xalci</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    </head>
+
+    <body ng-controller="calculatorController">
+
+        <h1>Factorial and Square App</h1>
+
+        <div>
+            <label for="number">Number:</label>
+            <input type="text" id="number" ng-model="number">
+        </div>
+
+        <div>
+            <button ng-click="calculateFact()">Factorial</button>
+            <button ng-click="calculateSquare()">Square</button>
+        </div>
+
+        <p ng-show="factorialresult!==undefined">Factorial:{{factorialresult}}</p>
+        <p ng-show="squareresult!==undefined">Square:{{squareresult}}</p>
+
+        <script>
+             
+             var app=angular.module('calculatorApp',[])
+             app.controller('calculatorController',function($scope){
+                $scope.calculateFact=function(){
+                    var num=$scope.number;
+
+                    if (num==0||num==1){
+                        $scope.factorialresult=1;
+                    }
+                    else{
+                        $scope.factorialresult= factorial(num);
+                    }
+                };
+                $scope.calculateSquare=function(){
+                    var num=$scope.number;
+
+                    $scope.squareresult= num*num;
+                };
+
+                function factorial(n) {
+                    return (n != 1) ? n * factorial(n - 1) : 1;
+                }
+             });
+        </script>
+    </body>
+</html>
