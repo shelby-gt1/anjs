@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html ng-app="employeeApp">
-<head>
-<title>Employee Management</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
-</head>
-<body ng-controller="EmployeeController">
-<h2>Employee List</h2>
-<label>Search by Name:</label>
-<input type="text" ng-model="searchName">
-<label>Search by Salary: </label>
-<input type="text" ng-model="searchSalary">
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Salary</th>
-</tr>
-</thead>
-<tbody>
-<tr ng-repeat="employee in employees | filter: {name: searchName, salary: searchSalary}">
-<td>{{ employee.name}}</td>
-<td>{{ employee.salary | currency }}</td>
-</tr>
-</tbody>
-</table>
-<script>
-angular.module('employeeApp', []).controller('EmployeeController', function ($scope) {
-$scope.employees = [
-{ name: 'Alen Joe', salary: 50000 },
-{ name: 'Rahul Smith', salary: 60000 },
-{ name: 'Shan jay', salary: 55000 },
-{ name: 'Roy', salary: 70000 },
-{ name: 'Arman', salary: 80000 },
-{ name: 'John', salary: 85000 },
-{ name: 'Joe', salary: 65000 },
-{ name: 'Monica', salary: 60000 },
-{ name: 'Chandler', salary: 85000 }
-];
-});
-</script>
-</body>
+    <head>
+        <title>Employee Management</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    </head>
+    <body ng-controller="EmployeeController">
+        <h2>Employee List</h2>
+        <label>Search by Name:</label>
+            <input type="text" ng-model="searchName">
+        <label>Search by Salary: </label>
+            <input type="text" ng-model="searchSalary">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+            <tr ng-repeat="employee in employees | filter: {name: searchName, salary: searchSalary}">
+                <td>{{ employee.name}}</td>
+                <td>{{ employee.salary | currency }}</td>
+            </tr>
+        </table>
+        <script>
+            angular.module('employeeApp', []).controller('EmployeeController', function ($scope) {
+                $scope.employees = [
+                    { name: 'Alen Joe', salary: 50000 },
+                    { name: 'Rahul Smith', salary: 60000 },
+                    { name: 'Shan jay', salary: 55000 },
+                    { name: 'Roy', salary: 70000 },
+                    { name: 'Arman', salary: 80000 },
+                    { name: 'John', salary: 85000 },
+                    { name: 'Joe', salary: 65000 },
+                    { name: 'Chandler', salary: 85000 }
+                    { name: 'Monica', salary: 60000 },
+                ];
+            });
+        </script>
+    </body>
 </html>
