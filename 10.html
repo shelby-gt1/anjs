@@ -7,16 +7,16 @@
     <body ng-controller="ShoppingController">
         <h1>Shopping List</h1>
         <div>
-        <label>New Item: </label>
+        <label>New Item:</label>
         <input type="text" id="newItem" ng-model="newItem"> 
         <button ng-click="addItem()">Add Item</button> 
         </div>
-        <ol>
+        <ul>
             <li ng-repeat="item in shoppingList">
                 {{ item }}
                 <button ng-click="removeItem($index)">Remove</button>
             </li>
-        </ol>
+        </ul>
         <h3 ng-show="titems">Total Items: {{titems}}</h3>
     </body>
     <script>
@@ -26,14 +26,13 @@
             $scope.shoppingList = ['Apples', 'Bananas', 'Milk', 'Bread'];
             $scope.addItem = function () {
                 if ($scope.newItem) {
-                    $scope.shoppingList.push($scope.newItem);
-                    $scope.newItem = '';    
+                    $scope.shoppingList.push($scope.newItem);   
                     $scope.titems = $scope.titems + 1;
                 }
             };
             $scope.removeItem = function(index) {
                 $scope.shoppingList.splice(index, 1);
-                $scope.titems=parseInt($scope.titems)-1;
+                $scope.titems=$scope.titems-1;
             };
         });
     </script> 
