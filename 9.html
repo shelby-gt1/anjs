@@ -16,8 +16,8 @@
                 <th>Salary</th>
             </tr>
             <tr ng-repeat="employee in employees | filter: {name: searchName, salary: searchSalary}">
-                <td>{{ employee.name}}</td>
-                <td>{{ employee.salary | currency }}</td>
+                <th>{{ employee.name}}</th>
+                <th>{{ employee.salary | currency }}</th>
             </tr>
         </table>
         <script>
@@ -30,7 +30,7 @@
                     { name: 'Arman', salary: 80000 },
                     { name: 'John', salary: 85000 },
                     { name: 'Joe', salary: 65000 },
-                    { name: 'Chandler', salary: 85000 }
+                    { name: 'Chandler', salary: 85000 },
                     { name: 'Monica', salary: 60000 },
                 ];
             });
