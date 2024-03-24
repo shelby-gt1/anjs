@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html ng-app="shoppingApp">
-<head>
-<title>Shopping List App</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
-</head>
-<body ng-controller="ShoppingController">
-<h1>Shopping List</h1>
-<div>
-<label for="newItem">New Item: </label>
-<input type="text" id="newItem" ng-model="newItem"> 
-<button ng-click="addItem()">Add Item</button> 
-</div>
-<ol>
-<li ng-repeat="item in shoppingList">
-{{ item }}
-<button ng-click="removeItem($index)">Remove</button>
-</li>
-</ol>
-<h3 ng-show="titems">Total Items: {{titems}}</h3>
-<script>
-var app = angular.module('shoppingApp', []);
-app.controller('ShoppingController', function ($scope) {
-$scope.titems=4;
-$scope.shoppingList = ['Apples', 'Bananas', 'Milk', 'Bread'];
-$scope.addItem = function () {
-if ($scope.newItem) {
-$scope.shoppingList.push($scope.newItem);
-$scope.newItem = ''; 
-}
-};
-$scope.removeItem = function(index) {
-$scope.shoppingList.splice(index, 1);
-$scope.titems=parseInt($scope.titems)-1;
-};
-});
-</script> 
-</body>
+    <head>
+        <title>Shopping List App</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    </head>
+    <body ng-controller="ShoppingController">
+        <h1>Shopping List</h1>
+        <div>
+        <label>New Item: </label>
+        <input type="text" id="newItem" ng-model="newItem"> 
+        <button ng-click="addItem()">Add Item</button> 
+        </div>
+        <ol>
+            <li ng-repeat="item in shoppingList">
+                {{ item }}
+                <button ng-click="removeItem($index)">Remove</button>
+            </li>
+        </ol>
+        <h3 ng-show="titems">Total Items: {{titems}}</h3>
+    </body>
+    <script>
+        var app = angular.module('shoppingApp', []);
+        app.controller('ShoppingController', function ($scope) {
+            $scope.titems=4;
+            $scope.shoppingList = ['Apples', 'Bananas', 'Milk', 'Bread'];
+            $scope.addItem = function () {
+                if ($scope.newItem) {
+                    $scope.shoppingList.push($scope.newItem);
+                    $scope.newItem = '';    
+                    $scope.titems = $scope.titems + 1;
+                }
+            };
+            $scope.removeItem = function(index) {
+                $scope.shoppingList.splice(index, 1);
+                $scope.titems=parseInt($scope.titems)-1;
+            };
+        });
+    </script> 
 </html>
